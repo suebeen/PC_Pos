@@ -2,19 +2,11 @@ package Person;
 
 public class Member extends Person{
 	
-<<<<<<< HEAD
-	String name;	//이름
-	String birth;	//생년월일
-	int totalTime;	//누적시간
-	String grade;	//등급
-	boolean isAdult;	//미성년자확인(01년생부터성인)
-=======
 	protected String name;	//이름
 	protected String birth;	//생년월일
 	protected int totalTime;	//누적시간
 	protected String grade;	//등급
 	protected boolean isAdult;	//미성년자확인(01년생부터성인)
->>>>>>> suebeen
 	
 	//constructor
 	public Member() {	//default

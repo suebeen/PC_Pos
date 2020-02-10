@@ -2,11 +2,6 @@ package Person;
 
 public class Person {
 
-<<<<<<< HEAD
-	String ID;	//ID
-	int restTime;	//ÀÜ¿©½Ã°£
-	double saleRatio;	//ÇÒÀÎ·ü
-=======
 	protected String ID;	//ID
 	protected int restTime;	//ÀÜ¿©½Ã°£
 	protected double saleRatio;	//ÇÒÀÎ·ü
@@ -46,5 +41,4 @@ public class Person {
 	}
 	
 	
->>>>>>> suebeen
 }
