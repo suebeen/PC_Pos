@@ -3,7 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+<<<<<<< HEAD
 
+=======
+>>>>>>> suebeen
 import javax.swing.*;
 
 public class ShowHome extends JFrame implements ActionListener, Runnable{
@@ -42,9 +45,12 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 			seatPanel.add(seat[i]);
 		}
 		
+<<<<<<< HEAD
 		
 		
 		
+=======
+>>>>>>> suebeen
 		this.add(seatPanel);
 	}
 
