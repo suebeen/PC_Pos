@@ -22,6 +22,15 @@ public class Member extends Person{
 		isAdult = IsAdult(birth);
 	}
 	
+	public Member(String name,  String id, String birth,String grade,int rT,int tT) {//DB에서 불러오기
+		super(rT);
+		this.name=name;
+		this.birth=birth;
+		this.grade = grade;
+		this.ID=id;
+		this.totalTime=tT;
+	}
+	
 	//method
 	public boolean IsAdult(String birth) {
 		if(birth.charAt(0)=='0'&&birth.charAt(1)>='1') {

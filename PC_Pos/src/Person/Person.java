@@ -13,6 +13,9 @@ public class Person {
 		this.restTime = restTime;
 		this.saleRatio = 0.0;
 	}
+	public Person(int restTime) {//DB에서 불러오기
+		this.restTime = restTime;
+	}
 	
 	//method
 	public void PersonInfo() {
