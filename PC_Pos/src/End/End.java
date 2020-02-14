@@ -15,7 +15,7 @@ public class End {
 	Statement stmt;
 
 	//로그아웃 + 회원정보 저장
-	public End(List<Member> member) {//회원정보가 담겨있는 리스트가 들어오겠지?		
+	public End(Member member) {//회원정보가 담겨있는 리스트가 들어오겠지?		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/mydb", "root", "201612006");
@@ -31,33 +31,31 @@ public class End {
 		}
 	}
 	
-	private void update(List<Member> member) throws SQLException, ClassNotFoundException{
+	private void update(Member member) throws SQLException, ClassNotFoundException{
 		// TODO Auto-generated method stub
-		for (int i = 0; i < member.size(); i++) {
 			try {
 				stmt = conn.createStatement();
-				String sql = "UPDATE pc_pos SET RESTTIME="+"'"+member.get(i).getRestTime()+"'"+"WHERE NAME="+"'"+member.get(i).getName()+"'";
+				String sql = "UPDATE pc_pos SET RESTTIME="+"'"+member.getRestTime()+"'"+"WHERE NAME="+"'"+member.getName()+"'";
 				stmt.executeUpdate(sql);
-				sql = "UPDATE pc_pos set TOTALTIME=" + "'"+member.get(i).getTotalTime() +"'"+ "where NAME=" +"'"+ member.get(i).getName()+"'";
+				sql = "UPDATE pc_pos set TOTALTIME=" + "'"+member.getTotalTime() +"'"+ "where NAME=" +"'"+ member.getName()+"'";
 				stmt.executeUpdate(sql);
 				stmt.close();
 			} catch (NullPointerException e) {
 				String sql = "insert into pc_pos values(?,?,?,?,?,?)";
 				if(conn!=null) {
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1,member.get(i).getName());
-					pstmt.setString(2, member.get(i).getID());
-					pstmt.setString(3, member.get(i).getBirth());
-					pstmt.setString(4, member.get(i).getGrade());
-					pstmt.setInt(5, member.get(i).getRestTime());
-					pstmt.setInt(6, member.get(i).getTotalTime());
+					pstmt.setString(1,member.getName());
+					pstmt.setString(2, member.getID());
+					pstmt.setString(3, member.getBirth());
+					pstmt.setString(4, member.getGrade());
+					pstmt.setInt(5, member.getRestTime());
+					pstmt.setInt(6, member.getTotalTime());
 					pstmt.execute();
 					pstmt.close();
 				}
 
 			}
-			
-		}
+					
 		conn.close();
 	}
 }
