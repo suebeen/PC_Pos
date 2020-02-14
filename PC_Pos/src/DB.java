@@ -32,7 +32,7 @@ public class DB {
 		}
 	}
 
-	private void GetBDtoList() {// BD에서 가져온 단어와 뜻을 list와 map으로 등록
+	private void GetBDtoList() throws SQLException {// BD에서 가져온 단어와 뜻을 list와 map으로 등록
 		// TODO Auto-generated method stub
 		String sql = "select * from pc_pos";
 		if (conn != null) {
@@ -56,5 +56,8 @@ public class DB {
 
 		}
 		System.out.println("리스트 성공");
+		rs.close();
+		pstmt.close();
+		conn.close();
 	}
 }
