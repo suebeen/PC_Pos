@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 import javax.swing.*;
 
+import Menu.ShowMenu;
+
 public class ShowHome extends JFrame implements ActionListener, Runnable{
 	JLabel time;
 	Thread thread;
@@ -104,7 +106,7 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 		if(e.getSource() == btn1) {
 			System.out.println("test");
 		}else if(e.getSource() == btn2) {
-			
+			new ShowMenu();
 		}else if(e.getSource() == btn3) {
 			
 		}else if(e.getSource() == btn4){
