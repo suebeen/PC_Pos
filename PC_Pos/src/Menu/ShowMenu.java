@@ -14,6 +14,7 @@ public class ShowMenu extends JFrame{
 	int scH,scW;
 	JPanel totalPanel, totalPanel1;
 	DefaultTableModel model;
+	Integer totalcost;
 	public ShowMenu(){
 		super("메뉴");
 		Toolkit kit = this.getToolkit();
@@ -48,7 +49,8 @@ public class ShowMenu extends JFrame{
 		model = new DefaultTableModel(colNames,0);
 		JTable table = new JTable(model);
 		totalPanel1.add(new JScrollPane(table),BorderLayout.CENTER);
-				
+		
+		JLabel totallabel = new JLabel(totalcost.toString());
 		JButton buy = new JButton("구매하기");
 		buy.addActionListener(new ActionListener() {
 
@@ -86,6 +88,7 @@ public class ShowMenu extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				model.addRow(new Object[] {food.name,"1",food.cost});
+				totalcost += food.cost;
 			}
 			
 		});
