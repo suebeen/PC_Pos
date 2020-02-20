@@ -1,6 +1,20 @@
 package Start;
-import Manager.*;
+import java.util.Scanner;
+import Person.*;
 
 public class Search {
-	//CustomerInfo 를 매개변수로 회원정보 호출
+
+	Scanner s = new Scanner(System.in);
+	String insertID;
+
+	public Member Searching() {
+		insertID = s.next();
+		Member findMember = new Member();
+		//리스트에서 있는지 비교
+		//....
+		//findMember = 찾은멤버
+		
+		return findMember;
+	}
+	
 }

@@ -9,8 +9,8 @@ public class SeatBtn extends JButton implements ActionListener{
 	int rt;//남은시간, Remaining time
 	boolean isUsing;//사용중인가 true -> 사용중 / false -> 사용ㄴㄴ
 	boolean age; //미성년자 true -> 으른 / false -> 꼬마
-	SeatBtn(int nume){
-		super("좌석번호 : "+nume);
+	public SeatBtn(int num){
+		super("좌석번호 : "+num);
 		this.user = null;
 		this.rt = 0;
 		this.isUsing =false;

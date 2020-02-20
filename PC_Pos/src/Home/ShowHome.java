@@ -1,4 +1,10 @@
 package Home;
+import Menu.*;
+import Start.*;
+import End.*;
+import Person.*;
+import Seat.*;
+import Manager.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
