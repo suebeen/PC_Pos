@@ -8,11 +8,17 @@ public class DB {
 	private ResultSet rs;
 	private List<Member> MemberList;
 	
+	public List<Member> getMemberList() {
+		return MemberList;
+	}
+
+	public void setMemberList(List<Member> memberList) {
+		MemberList = memberList;
+	}
+
 	DB(){
 		MemberList = new ArrayList<>();
-		
-		readDB();
-		
+		readDB();		
 	}
 
 	private void readDB() {
