@@ -7,9 +7,17 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -42,9 +50,9 @@ public class ShowMenu extends JFrame{
 		
 		totalPanel = new JPanel();
 		totalPanel.setLayout(new FlowLayout());
-		menu(new noodle(1000,"신라면",true),"photo/라면.png");
-		menu(new jisung_park(1500,"박지성피카츄",false),"photo/박지성피카츄.jpg");
-		menu(new beverage(2000,"닥터페퍼",false),"photo/음료.jpg");
+		menu(new noodle(1000,"신라면",true),"photo/라면.png",this);
+		menu(new jisung_park(1500,"박지성피카츄",false),"photo/박지성피카츄.jpg",this);
+		menu(new beverage(2000,"닥터페퍼",false),"photo/음료.jpg",this);
 		menufeild();
 		this.add(totalPanel,BorderLayout.CENTER);
 		this.add(totalPanel1,BorderLayout.EAST);
@@ -55,7 +63,6 @@ public class ShowMenu extends JFrame{
 		// TODO Auto-generated method stub
 		totalPanel1 = new JPanel();
 		totalPanel1.setPreferredSize(new Dimension(500,scH-scH/3));
-		//totalPanel1.setLayout(new FlowLayout());
 		String[] colNames = new String[] {"음식 명","갯 수","가 격","토핑"};
 		JLabel title = new JLabel("장바구니");
 		totalPanel1.add(title,BorderLayout.NORTH);
@@ -65,12 +72,13 @@ public class ShowMenu extends JFrame{
 		totalPanel1.add(new JScrollPane(table),BorderLayout.CENTER);
 		totallabel = new JTextField("  총액    ");
 
-		JButton buy = new JButton("구매하기");
+		JButton buy = new JButton("구매하기");//결재 버튼
 		buy.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				//===================================여기에 결제 추가
 				dispose();
 			}
 			
@@ -79,7 +87,7 @@ public class ShowMenu extends JFrame{
 		totalPanel1.add(totallabel);
 	}
 	
-	private void menu(Food food, String photo) {//매뉴를 추가
+	private void menu(Food food, String photo,JFrame frame) {//매뉴를 추가
 		// TODO Auto-generated method stub
 		JPanel menu = new JPanel();
 		menu.setPreferredSize(new Dimension(scW/8,scH-scH/3));
@@ -100,23 +108,33 @@ public class ShowMenu extends JFrame{
 		totalcost = 0;
 		
 		addfood.addActionListener(new ActionListener() {
-
+			topping tempo;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
 				if(food.istopping) {
-					int result = JOptionPane.showConfirmDialog(null, "토핑을 추가하시겠습니까? 1000원");
-					if(result == JOptionPane.YES_OPTION) {
-						totalcost += 1000;
+					tempo = new topping(frame);
+					food.cost+=tempo.total;
+					if(!tempo.temp.isEmpty()) 
 						food.toppingchoice = true;
+				}
+				for(int i=0;i<model.getRowCount();i++) {
+					if(model.getValueAt(i, 0).equals(food.name)&&!food.toppingchoice) {
+						Object t = model.getValueAt(i, 3);
+						if (t.equals(false)) {
+							model.removeRow(i);
+							food.count++;
+							break;
+						}
 					}
 				}
+
 				if(food.toppingchoice) {
-					model.addRow(new Object[] {food.name,"1",food.cost,"ㅇㅇ"});
+					model.addRow(new Object[] {food.name,1,food.cost,tempo.temp});
 					food.toppingchoice = false;
 				}else 
-					model.addRow(new Object[] {food.name,"1",food.cost,"ㄴㄴ"});
+					model.addRow(new Object[] {food.name,food.count+1,food.cost,food.toppingchoice});
 				
 
 				totalcost += food.cost;
@@ -130,6 +148,77 @@ public class ShowMenu extends JFrame{
 		totalPanel.add(menu);
 		
 	}
+	class topping extends JDialog  implements ItemListener{
+		JCheckBox cheez,rice,cake;
+		Set<String> temp = new HashSet<>();//토핑 목록
+		int total;
+		topping(JFrame frame){
+			super(frame,"토핑",true);
+			Toolkit kit = this.getToolkit();
+			Dimension sc = kit.getScreenSize();
+			scH = sc.height;
+			scW = sc.width;
+			this.setLocation(scW/2-150,scH/2-75);
+			this.setSize(300,150);
 
+			this.setLayout(new FlowLayout());
+			JLabel title = new JLabel("                             토핑 목록                                ");
+			this.add(title,BorderLayout.NORTH);
+			JPanel list = new JPanel();
+			
+			cheez = new JCheckBox("치즈, 500원");
+			rice = new JCheckBox("밥, 1000원");
+			cake = new JCheckBox("떡, 500원");
+			cheez.addItemListener(this);
+			rice.addItemListener(this);
+			cake.addItemListener(this);
+
+			list.add(cheez);
+			list.add(rice);
+			list.add(cake);
+			
+			this.add(list,BorderLayout.CENTER);
+			JButton btn = new JButton("확인");
+			btn.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					dispose();
+				}
+				
+			});
+			this.add(btn,BorderLayout.SOUTH);
+			
+			this.setVisible(true);
+		}
+		@Override
+		public void itemStateChanged(ItemEvent e){
+			// TODO Auto-generated method stub
+			if(e.getStateChange()==ItemEvent.SELECTED){
+				if(e.getItem() == cheez) {
+					total+=500;
+					temp.add("치즈");
+				}else if(e.getItem()==rice){
+					total += 1000;
+					temp.add("밥");
+				}else {
+					total += 500;
+					temp.add("떡");
+				}
+			}else if(e.getStateChange()==ItemEvent.DESELECTED) {
+				if(e.getItem() == cheez) {
+					total-=500;
+					temp.remove("치즈");
+				}else if(e.getItem()==rice){
+					total -= 1000;
+					temp.remove("밥");
+				}else {
+					total -= 500;
+					temp.remove("떡");
+				}
+			}
+		}
+	}
 
 }

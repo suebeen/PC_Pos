@@ -1,23 +1,37 @@
 package Seat;
-import Person.*;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Seat {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import Person.Member;
+
+public class Seat extends JButton{
 	//좌석출력 5X10
 	//현재사용자 list<Customer>
-	int num;
+	int number;
 	Member cus;
 
-	public Seat() {
-		Seat[][] seat = new Seat[5][10];
-		for(int i=0;i<5;i++) {
-			for(int j=0;j<10;j++) {
-				seat[i][j].num = i*10+(j+1);
-			}
-		}
+	public Seat(String str,int i,JFrame frame) {
+		super(str);
+		number = i;
+		this.setBackground(Color.black);
+		this.addActionListener(new SeatActionListener(frame,i));
 	}
 	
-	public void showSeat() {
-		System.out.println(num);
-		System.out.println(cus);
+	class SeatActionListener implements ActionListener{
+		int number;
+		JFrame frame;
+		SeatActionListener(JFrame frame,int i){
+			number = i+1;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			new SeatBtn(frame,number);
+		}
 	}
 }

@@ -9,12 +9,15 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Menu.ShowMenu;
+import Seat.Seat;
+import Seat.SeatBtn;
 
 public class ShowHome extends JFrame implements ActionListener, Runnable{
 	JLabel time;
@@ -23,7 +26,7 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 	JButton btn2;
 	JButton btn3;
 	JButton btn4;
-	JButton[] seat = new JButton[50];
+	Seat[] seat = new Seat[50];
 	int screenH, screenW;
 	public ShowHome(){
 		super("PC_cafe");
@@ -47,8 +50,9 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 		seatPanel.setBackground(Color.black);
 		
 		for(int i=0;i<seat.length;i++) {
-			seat[i] = new JButton("test");
-			seat[i].setBackground(Color.black);
+			seat[i] = new Seat("test",i,this);
+//			seat[i].setBackground(Color.black);
+//			seat[i].addActionListener(new SeatActionListener(this,i));
 			seatPanel.add(seat[i]);
 		}
 		
@@ -108,6 +112,8 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 		totalPanel.add(btnPanel);
 		this.add(totalPanel,BorderLayout.EAST);		
 	}
+	
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

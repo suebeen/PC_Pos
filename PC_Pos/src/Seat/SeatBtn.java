@@ -1,21 +1,58 @@
 package Seat;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 
-public class SeatBtn extends JButton implements ActionListener{
+public class SeatBtn extends JDialog implements ActionListener{
 	String user;
 	int rt;//남은시간, Remaining time
 	boolean isUsing;//사용중인가 true -> 사용중 / false -> 사용ㄴㄴ
 	boolean age; //미성년자 true -> 으른 / false -> 꼬마
-	public SeatBtn(int num){
-		super("좌석번호 : "+num);
+	public SeatBtn(Frame frame, Integer num){
+		super(frame,num.toString()+"번 좌석",true);
 		this.user = null;
 		this.rt = 0;
-		this.isUsing =false;
+		this.isUsing =true;
+		Toolkit kit = this.getToolkit();
+		Dimension sc = kit.getScreenSize();
+		int scH = sc.height;
+		int scW = sc.width;
+		this.setLocation(scW/2-150,scH/2-75);
+		this.setSize(300,150);
+		init();
+		this.setVisible(true);
 	}
 	
+	private void init() {
+		// TODO Auto-generated method stub
+		if(isUsing) {
+			this.setLayout(new FlowLayout());
+			this.add(new JLabel("이름 : "+this.user));
+			this.add(new JLabel("남은시간 : "+this.rt));
+			this.add(new JLabel("미성년자 : "+this.age));
+			JButton btn = new JButton("확인");
+			btn.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					dispose();
+				}
+				
+			});
+			this.add(btn);
+		}else {
+			
+		}
+	}
+
 	public boolean isAge() {
 		return age;
 	}
