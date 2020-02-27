@@ -16,8 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Menu.ShowMenu;
+import Person.Member;
 import Seat.Seat;
-import Seat.SeatBtn;
 
 public class ShowHome extends JFrame implements ActionListener, Runnable{
 	JLabel time;
@@ -50,11 +50,15 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 		seatPanel.setBackground(Color.black);
 		
 		for(int i=0;i<seat.length;i++) {
-			seat[i] = new Seat("test",i,this);
+			seat[i] = new Seat("사용가능",i,this);
 //			seat[i].setBackground(Color.black);
 //			seat[i].addActionListener(new SeatActionListener(this,i));
 			seatPanel.add(seat[i]);
 		}
+		//=======================================
+		// test
+		seat[10].setCus_Num(new Member("정덕수","010","19960509","SILVER",10,100),10, true);
+		//==========================================
 		
 		this.add(seatPanel);
 	}

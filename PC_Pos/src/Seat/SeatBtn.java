@@ -1,7 +1,7 @@
 package Seat;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 public class SeatBtn extends JDialog implements ActionListener{
+	//홈화면에서 버튼 이미지 설정 클래스
 	String user;
 	int rt;//남은시간, Remaining time
 	boolean isUsing;//사용중인가 true -> 사용중 / false -> 사용ㄴㄴ
@@ -33,10 +34,9 @@ public class SeatBtn extends JDialog implements ActionListener{
 	private void init() {
 		// TODO Auto-generated method stub
 		if(isUsing) {
-			this.setLayout(new FlowLayout());
-			this.add(new JLabel("이름 : "+this.user));
-			this.add(new JLabel("남은시간 : "+this.rt));
-			this.add(new JLabel("미성년자 : "+this.age));
+			this.setLayout(new GridLayout(0,1));
+			this.add(new JLabel("<html>이름 : "+this.user+"<br/>남은시간 : "+this.rt+"<br/>미성년자 : "+this.age+"</html>"));
+
 			JButton btn = new JButton("확인");
 			btn.addActionListener(new ActionListener() {
 
