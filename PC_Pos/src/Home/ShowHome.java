@@ -9,6 +9,7 @@ import javax.swing.*;
 import Manager.Setting;
 import Menu.ShowMenu;
 import Person.Member;
+import Person.MemberList;
 import Seat.Seat;
 import Start.Start;
 
@@ -30,6 +31,7 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 		this.setLocation(0, 0);
 		this.setSize(screenW, screenH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		new MemberList();
 		homebtn();
 		homeseats();
 		this.setVisible(true);
@@ -48,7 +50,8 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 		}
 		//=========================================
 		// test
-		seat[10].setCus_Num(new Member("Á¤´ö¼ö","010-7354-5754","19960509","SILVER",1,100),10, true);
+		
+		seat[10].setCus_Num(MemberList.List.get(0),10, true);
 		//==========================================
 		
 		this.add(seatPanel);

@@ -31,6 +31,7 @@ public class Seat extends JButton implements Runnable {
 	}
 
 	public void setCus_Num(Member cus, int number, boolean isUse) {//손님 입력 시 부른다.
+		//손님, 좌석번호, 사용중
 		this.cus = cus;
 		this.number = number;
 		this.isUse = isUse;

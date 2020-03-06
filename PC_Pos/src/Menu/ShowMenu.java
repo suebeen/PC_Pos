@@ -76,7 +76,7 @@ public class ShowMenu extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Sales();
+				//new Sales();
 				// TODO Auto-generated method stub
 				//===================================여기에 결제 추가
 				//test
