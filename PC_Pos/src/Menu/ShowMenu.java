@@ -9,9 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
@@ -20,12 +18,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import Manager.Sales;
 
 public class ShowMenu extends JFrame{
 	//메뉴전체출력(메인,토핑)
@@ -77,8 +76,12 @@ public class ShowMenu extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				new Sales();
 				// TODO Auto-generated method stub
 				//===================================여기에 결제 추가
+				//test
+				Sales.Cash =totallabel.getText();
+				//test
 				dispose();
 			}
 			

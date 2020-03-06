@@ -10,17 +10,18 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
+import Person.Member;
+
 public class SeatBtn extends JDialog implements ActionListener{
 	//홈화면에서 버튼 이미지 설정 클래스
-	String user;
-	int rt;//남은시간, Remaining time
+	Member cus;
 	boolean isUsing;//사용중인가 true -> 사용중 / false -> 사용ㄴㄴ
-	boolean age; //미성년자 true -> 으른 / false -> 꼬마
-	public SeatBtn(Frame frame, Integer num){
+	
+	public SeatBtn(Frame frame, Integer num,Member cus){
 		super(frame,num.toString()+"번 좌석",true);
-		this.user = null;
-		this.rt = 0;
-		this.isUsing =true;
+		if(cus != null&&cus.getRestTime()!=0)
+			this.cus = cus;
+		this.isUsing =true;//디폴트는 사용안하는 중
 		Toolkit kit = this.getToolkit();
 		Dimension sc = kit.getScreenSize();
 		int scH = sc.height;
@@ -35,8 +36,10 @@ public class SeatBtn extends JDialog implements ActionListener{
 		// TODO Auto-generated method stub
 		if(isUsing) {
 			this.setLayout(new GridLayout(0,1));
-			this.add(new JLabel("<html>이름 : "+this.user+"<br/>남은시간 : "+this.rt+"<br/>미성년자 : "+this.age+"</html>"));
-
+			if(cus != null&&cus.getRestTime()!=0) 
+				this.add(new JLabel("<html>이름 : "+cus.getName()+"<br/>남은시간 : "+cus.getRestTime()+"<br/>미성년자 : "+cus.getBirth()+"</html>"));
+			else
+				this.add(new JLabel("<html>===============사 용 가 능================<br/><br/></html>"));
 			JButton btn = new JButton("확인");
 			btn.addActionListener(new ActionListener() {
 
@@ -53,24 +56,6 @@ public class SeatBtn extends JDialog implements ActionListener{
 		}
 	}
 
-	public boolean isAge() {
-		return age;
-	}
-	public void setAge(boolean age) {
-		this.age = age;
-	}
-	public String getUser() {
-		return user;
-	}
-	public void setUser(String user) {
-		this.user = user;
-	}
-	public int getRt() {
-		return rt;
-	}
-	public void setRt(int rt) {
-		this.rt = rt;
-	}
 	public boolean isUsing() {
 		return isUsing;
 	}

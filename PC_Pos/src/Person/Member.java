@@ -4,7 +4,7 @@ public class Member extends Person{
 	
 	protected String name;	//이름
 	protected String birth;	//생년월일
-	protected int totalTime;	//누적시간
+	protected Integer totalTime;	//누적시간
 	protected String grade;	//등급
 	protected boolean isAdult;	//미성년자확인(01년생부터성인)
 	

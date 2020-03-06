@@ -1,23 +1,16 @@
 package Home;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+import Manager.Setting;
 import Menu.ShowMenu;
 import Person.Member;
 import Seat.Seat;
+import Start.Start;
 
 public class ShowHome extends JFrame implements ActionListener, Runnable{
 	JLabel time;
@@ -51,13 +44,11 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 		
 		for(int i=0;i<seat.length;i++) {
 			seat[i] = new Seat("»ç¿ë°¡´É",i,this);
-//			seat[i].setBackground(Color.black);
-//			seat[i].addActionListener(new SeatActionListener(this,i));
 			seatPanel.add(seat[i]);
 		}
-		//=======================================
+		//=========================================
 		// test
-		seat[10].setCus_Num(new Member("Á¤´ö¼ö","010","19960509","SILVER",10,100),10, true);
+		seat[10].setCus_Num(new Member("Á¤´ö¼ö","010-7354-5754","19960509","SILVER",1,100),10, true);
 		//==========================================
 		
 		this.add(seatPanel);
@@ -123,13 +114,13 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == btn1) {
-			System.out.println("test");
+			new Start();
 		}else if(e.getSource() == btn2) {
 			new ShowMenu();
 		}else if(e.getSource() == btn3) {
-			
+
 		}else if(e.getSource() == btn4){
-			
+			new Setting(this);
 		}
 	}
 
