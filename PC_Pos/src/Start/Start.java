@@ -1,38 +1,25 @@
 package Start;
 import java.awt.*;
-import java.awt.event.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import Person.*;
 
+//비회원+회원 리스트를 매개변수로 받아야함 
 
 public class Start extends JFrame implements ActionListener{
 	
 	JPanel btnPanel = new JPanel();
-	JButton btn1;
-	JButton btn2;
-	JButton btn3;
+	JButton btn1,btn2,btn3;
 	Person temp = new Person();
-	
+
 	public Start() {
-		
-		ShowStart();
-		
-		//좌석선택
-		//좌석반환
-		//payTime
-		
-	}
-	
-	public void ShowStart() {
-		
 		setTitle("이용시작");
 		this.setSize(500, 200);
-		this.setLocation(500, 100); 
+		this.setLocation(500, 300); 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		
 		btnPanel.setBackground(Color.white);
-		btnPanel.setLayout(new GridLayout(3,1,10,20));
 		btnPanel.setPreferredSize(new Dimension(500,200));	
 		
 		btn1 = new JButton("회원 ");
@@ -64,19 +51,37 @@ public class Start extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}
 	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		dispose();
 		
-		if(e.getSource() == btn1) {
-			Search sc = new Search();
-			temp = sc.Searching();
-
+		//회원으로 시간추가
+		if(e.getSource() == btn1) {	
+			boolean isMember = false;
+			String ID = JOptionPane.showInputDialog("ID를 입력하세요.");
+			
+			//ID비교+isMember바꿔주기
+			
+			if(isMember) {
+				new AddTime(temp);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "회원정보가 없습니다.", "Message", JOptionPane.ERROR_MESSAGE);
+				new Start();
+			}
+			
+		//비회원으로 시간추가
 		}else if(e.getSource() == btn2) {
+			
+			//비회원 아이디 설정,list에 추가
+			
 			temp.setID("123456789");
-		
+			new AddTime(temp);
+			
+		//회원가입
 		}else if(e.getSource() == btn3) {
-			SignUp su = new SignUp();
-			temp = su.SignUP();
+			new SignUp();
 		}
 	}
 
