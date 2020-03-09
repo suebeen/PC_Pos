@@ -10,6 +10,7 @@ import Manager.Setting;
 import Menu.ShowMenu;
 import Person.Member;
 import Person.MemberList;
+import Person.NonMemberList;
 import Seat.Seat;
 import Start.Start;
 
@@ -32,6 +33,7 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 		this.setSize(screenW, screenH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		new MemberList();
+		new NonMemberList();
 		homebtn();
 		homeseats();
 		this.setVisible(true);
