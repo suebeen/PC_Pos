@@ -44,7 +44,6 @@ public class ShowMenu extends JFrame{
 		scW = sc.width;
 		this.setLocation(scW/6,scH/6);
 		this.setSize(scW-scW/3,scH-scH/3);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setLayout(new FlowLayout());
 		
 		totalPanel = new JPanel();

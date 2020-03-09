@@ -17,15 +17,14 @@ public class AddTime extends JFrame implements ActionListener{
 	}
 	
 	public void payment() {
-		new Pay(time*1000,man,true);
+		new Pay(time*1000,man);
 	}
 	
 	public void setTime() {
 		setTitle("시간선택");
 		this.setSize(500, 150);
 		this.setLocation(500, 300); 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		
+
 		btn[0] = new JButton("1시간");
 		btn[1] = new JButton("2시간 ");
 		btn[2] = new JButton("3시간 ");
@@ -33,7 +32,7 @@ public class AddTime extends JFrame implements ActionListener{
 		btn[4] = new JButton("10시간 ");
 		
 		for(int i=0;i<btn.length;i++) {
-			btn[i].setFont(new Font("SansSerif",Font.BOLD,10));
+			btn[i].setFont(new Font("SansSerif",Font.BOLD,12));
 			btn[i].setPreferredSize(new Dimension(80,80));
 			btn[i].addActionListener(this);
 			btnPanel.add(btn[i]);
