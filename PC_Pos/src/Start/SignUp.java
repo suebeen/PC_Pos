@@ -53,6 +53,10 @@ public class SignUp extends JFrame implements ActionListener{
 		dispose();
 		if(e.getSource() == ok) {
 			Member man = new Member(name.getText(),birth.getText(),id.getText());
+			//=========================================
+			// 자리선택
+			
+			//==========================================
 			new AddTime(man);
 		}
 		

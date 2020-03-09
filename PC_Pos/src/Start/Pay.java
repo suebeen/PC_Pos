@@ -15,14 +15,14 @@ public class Pay extends JFrame implements ActionListener{
 	Integer money;
 	
 	//time
-	public Pay(int m,Person man) {
+	public Pay(int m,Person user) {
 		money = m;
 		
 		setTitle("결제");
 		this.setSize(300, 250);
 		this.setLocation(600, 300); 
 		
-		info = new JLabel(man.getID()+" 님");
+		info = new JLabel(user.getID()+" 님");
 		info.setFont(new Font("SansSerif",Font.BOLD,15));
 		info.setPreferredSize(new Dimension(200,30));
 		cost = new JLabel("결제금액은 "+money.toString()+" 원 입니다.");

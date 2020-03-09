@@ -9,15 +9,15 @@ public class AddTime extends JFrame implements ActionListener{
 	JPanel btnPanel = new JPanel();
 	JButton[] btn = new JButton[5];
 	int time;
-	Person man;
+	Person user;
 	
 	public AddTime(Person m) {
-		man = m;
+		user = m;
 		setTime();
 	}
 	
 	public void payment() {
-		new Pay(time*1000,man);
+		new Pay(time*1000,user);
 	}
 	
 	public void setTime() {
