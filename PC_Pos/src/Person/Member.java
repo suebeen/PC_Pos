@@ -103,7 +103,13 @@ public class Member extends Person{
 		this.isAdult = isAdult;
 	}
 
-	//생일쿠폰?
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "이름 : "+this.name+" 아이디 : "+this.ID+" 등급 : "+this.grade+" 남은시간 : "+this.restTime+" 누적시간 : "+this.totalTime+'\n';
+	}
+
+	
 	
 	
 }

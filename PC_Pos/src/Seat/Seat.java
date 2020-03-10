@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import Person.Member;
 
 public class Seat extends JButton implements Runnable {
-	// Seat버튼 클릭 시, 출력되는 화면 클래스
+	// 홈화면 버튼 클래스
 	int number;
 	boolean isUse;
 	Member cus;
@@ -30,12 +30,12 @@ public class Seat extends JButton implements Runnable {
 		this.addActionListener(temp);
 	}
 
-	public void setCus_Num(Member cus, int number, boolean isUse) {//손님 입력 시 부른다.
+	public void setCus_Num(Member cus1, int number1, boolean isUse1) {//손님 입력 시 부른다.
 		//손님, 좌석번호, 사용중
-		this.cus = cus;
-		this.number = number;
-		this.isUse = isUse;
-		temp.setcus(cus);
+		cus = cus1;
+		number = number1;
+		isUse = isUse1;
+		temp.setcus(cus);		
 		this.setBackground(Color.WHITE);
 		Calendar cal1 = Calendar.getInstance();
 		starttime = cal1.get(Calendar.MINUTE);
@@ -101,5 +101,8 @@ public class Seat extends JButton implements Runnable {
 
 	public int getNumber() {
 		return number;
+	}
+	public boolean getIsUse() {
+		return isUse;
 	}
 }

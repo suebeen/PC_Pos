@@ -42,6 +42,7 @@ public class Person {
 	public void setSaleRatio(double saleRatio) {
 		this.saleRatio = saleRatio;
 	}
+
 	
 	
 }

@@ -1,3 +1,4 @@
+
 package Seat;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -13,7 +14,7 @@ import javax.swing.JLabel;
 import Person.Member;
 
 public class SeatBtn extends JDialog implements ActionListener{
-	//홈화면에서 버튼 이미지 설정 클래스
+	//버튼 클릭시 출력되는 화면
 	Member cus;
 	boolean isUsing;//사용중인가 true -> 사용중 / false -> 사용ㄴㄴ
 	

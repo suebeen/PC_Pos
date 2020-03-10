@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import Manager.Sales;
+import Start.Pay;
 
 public class ShowMenu extends JFrame{
 	//메뉴전체출력(메인,토핑)
@@ -35,6 +36,7 @@ public class ShowMenu extends JFrame{
 	DefaultTableModel model;
 	Integer totalcost;
 	JTextField totallabel;
+	Integer Cheez, Rice, Ricecake;
 
 	public ShowMenu(){
 		super("메뉴");
@@ -44,7 +46,6 @@ public class ShowMenu extends JFrame{
 		scW = sc.width;
 		this.setLocation(scW/6,scH/6);
 		this.setSize(scW-scW/3,scH-scH/3);
-		//this.setLayout(new FlowLayout());
 		
 		totalPanel = new JPanel();
 		totalPanel.setLayout(new FlowLayout());
@@ -75,12 +76,8 @@ public class ShowMenu extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//new Sales();
-				// TODO Auto-generated method stub
-				//===================================여기에 결제 추가
-				//test
-				Sales.Cash =totallabel.getText();
-				//test
+				Integer temp = new Integer(totallabel.getText());
+				new Pay(temp);
 				dispose();
 			}
 			
@@ -111,13 +108,15 @@ public class ShowMenu extends JFrame{
 		
 		addfood.addActionListener(new ActionListener() {
 			topping tempo;
+			int toppingcost;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				food.toSales();//Sales로 구매내역 보내기
 				
-				if(food.istopping) {
-					tempo = new topping(frame);
-					food.cost+=tempo.total;
+				if(food.istopping) {//토핑이 있을 경우
+					tempo = new topping(frame);//토핑 다이알로그 실행
+					toppingcost+=tempo.total;
 					if(!tempo.temp.isEmpty()) 
 						food.toppingchoice = true;
 				}
@@ -133,14 +132,15 @@ public class ShowMenu extends JFrame{
 				}
 
 				if(food.toppingchoice) {
-					model.addRow(new Object[] {food.name,1,food.cost,tempo.temp});
+					model.addRow(new Object[] {food.name,1,food.cost+toppingcost,tempo.temp});
 					food.toppingchoice = false;
 				}else 
 					model.addRow(new Object[] {food.name,food.count+1,food.cost,food.toppingchoice});
 				
 
-				totalcost += food.cost;
+				totalcost += food.cost+toppingcost;
 				
+				toppingcost = 0;
 				totallabel.setText(totalcost.toString());
 				totallabel.repaint();
 			}
@@ -201,23 +201,29 @@ public class ShowMenu extends JFrame{
 				if(e.getItem() == cheez) {
 					total+=500;
 					temp.add("치즈");
+					Sales.Cheez++;
 				}else if(e.getItem()==rice){
 					total += 1000;
 					temp.add("밥");
+					Sales.Rice++;
 				}else {
 					total += 500;
 					temp.add("떡");
+					Sales.Ricecake++;
 				}
 			}else if(e.getStateChange()==ItemEvent.DESELECTED) {
 				if(e.getItem() == cheez) {
 					total-=500;
 					temp.remove("치즈");
+					Sales.Cheez--;
 				}else if(e.getItem()==rice){
 					total -= 1000;
 					temp.remove("밥");
+					Sales.Rice--;
 				}else {
 					total -= 500;
 					temp.remove("떡");
+					Sales.Ricecake--;
 				}
 			}
 		}

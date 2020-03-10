@@ -49,7 +49,7 @@ public class Setting extends JDialog implements ActionListener{
 		if(e.getSource()==SalesBtn)
 			new Sales(frame);
 		else if(e.getSource()==AccountBtn) {
-
+			new CustomerInfo(frame);
 		}
 	}
 }

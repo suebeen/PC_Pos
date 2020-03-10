@@ -1,9 +1,19 @@
 package Start;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import Person.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import Person.MemberList;
+import Person.NonMemberList;
+import Person.Person;
 import Seat.Seat;
 
 public class Start extends JFrame implements ActionListener{
