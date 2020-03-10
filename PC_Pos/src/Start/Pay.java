@@ -13,7 +13,6 @@ public class Pay extends JFrame implements ActionListener{
 	JPanel btnPanel = new JPanel();
 	JButton btn1,btn2;
 	Integer money;
-	
 	//time
 	public Pay(int m,Person user) {
 		money = m;
@@ -31,9 +30,11 @@ public class Pay extends JFrame implements ActionListener{
 		btn1 = new JButton("카드");
 		btn1.setFont(new Font("SansSerif",Font.BOLD,18));
 		btn1.setPreferredSize(new Dimension(80,80));
+		btn1.addActionListener(this);
 		btn2 = new JButton("현금");
 		btn2.setFont(new Font("SansSerif",Font.BOLD,18));
 		btn2.setPreferredSize(new Dimension(80,80));
+		btn2.addActionListener(this);
 		
 		btnPanel.setBackground(Color.white);
 		btnPanel.add(info,null);
@@ -43,7 +44,6 @@ public class Pay extends JFrame implements ActionListener{
 		btnPanel.setLayout(new FlowLayout());
 		this.add(btnPanel,null);
 		this.setVisible(true);
-		
 	}
 	//menu
 	public Pay(int m) {
@@ -61,10 +61,11 @@ public class Pay extends JFrame implements ActionListener{
 		btn1 = new JButton("카드");
 		btn1.setFont(new Font("SansSerif",Font.BOLD,18));
 		btn1.setPreferredSize(new Dimension(80,80));
+		btn1.addActionListener(this);
 		btn2 = new JButton("현금");
 		btn2.setFont(new Font("SansSerif",Font.BOLD,18));
 		btn2.setPreferredSize(new Dimension(80,80));
-		
+		btn2.addActionListener(this);
 		btnPanel.setBackground(Color.white);
 		btnPanel.add(info,null);
 		btnPanel.add(cost,null);
@@ -80,13 +81,14 @@ public class Pay extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		dispose();
 		if(e.getSource() == btn1) {
 			Sales.Card += money;
 			JOptionPane.showMessageDialog(null, "카드 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+			dispose();
 		}else if(e.getSource() == btn2) {
 			Sales.Cash += money;
 			JOptionPane.showMessageDialog(null, "현금 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+			dispose();
 		}
 	}
 }

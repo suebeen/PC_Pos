@@ -1,9 +1,23 @@
 package Start;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import Person.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import Person.Member;
+import Person.MemberList;
+import Person.NonMemberList;
+import Person.Person;
 import Seat.Seat;
 
 public class Start extends JFrame implements ActionListener{
@@ -13,13 +27,17 @@ public class Start extends JFrame implements ActionListener{
 	JButton[] seats = new JButton[50];
 	Person temp = new Person();
 	Seat[] seat;
-	boolean success = false;
+	static boolean success = false;
 	
 	public Start(Seat[] seat) {
 		this.seat = seat;
 		setTitle("이용시작");
+		Toolkit kit = this.getToolkit();
+		Dimension sc = kit.getScreenSize();
+		int scH = sc.height;
+		int scW = sc.width;
 		this.setSize(500, 200);
-		this.setLocation(500, 300); 
+		this.setLocation(scW/2-250,  scH/2-100); 
 		
 		btnPanel.setBackground(Color.white);
 		btnPanel.setPreferredSize(new Dimension(500,200));	
@@ -63,31 +81,6 @@ public class Start extends JFrame implements ActionListener{
 		return false;
 	}
 	
-	public void Seating(Person user,Seat[] seat) {
-		
-		JFrame seatFrame = new JFrame();
-		seatFrame.setTitle("자리선택");
-		seatFrame.setSize(300, 600);
-		seatFrame.setLocation(600, 150); 
-		
-		for(int i=0;i<seats.length;i++) {
-			Integer index = i+1;
-			seats[i] = new JButton(index.toString());
-			if(seat[i].getIsUse()) seats[i].setBackground(Color.red);
-			else seats[i].setBackground(Color.green);
-			seats[i].setFont(new Font("SansSerif",Font.BOLD,10));
-			seats[i].setPreferredSize(new Dimension(50,50));
-			seats[i].addActionListener(this);
-			seatFrame.add(seats[i]);
-		}
-		seatFrame.setLayout(new FlowLayout());
-		seatFrame.setBackground(Color.white);
-		seatFrame.setVisible(true);
-	}
-	
-	public void SignUp() {
-		//회원정보 바꿔줘야함
-	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -99,10 +92,13 @@ public class Start extends JFrame implements ActionListener{
 			String ID = JOptionPane.showInputDialog("ID를 입력하세요.");
 			isMember = Searching(ID);
 			if(isMember) {
-				Seating(temp,seat);
+				new Seating(temp,seat);
 				if(success) {
+					success = false;
 					int result = JOptionPane.showConfirmDialog(null, "잔여시간: "+temp.getRestTime()+"분 , 충전하시겠습니까?", "충전여부", JOptionPane.YES_NO_OPTION); 
-					if(result == JOptionPane.YES_OPTION) new AddTime(temp);
+					if(result == JOptionPane.YES_OPTION) {
+						new AddTime(temp);
+					}
 				}
 			}
 			else {
@@ -112,21 +108,20 @@ public class Start extends JFrame implements ActionListener{
 			
 		//비회원으로 시간추가
 		}else if(e.getSource() == btn2) {
-			
+			Person nonMember;
 			StringBuilder sb = new StringBuilder();
 			sb.append("비회원");
 			sb.append(NonMemberList.List.size()+1);
-			temp.setID(sb.toString());
-			NonMemberList.List.add(temp);
-			Seating(temp,seat);
-			if(success) new AddTime(temp);
+			nonMember = new Person(sb.toString(),0);
+			NonMemberList.List.add(nonMember);
+			new Seating(nonMember,seat);
+			if(success) new AddTime(nonMember);
 			
-		//회원가입
+			//회원가입
 		}else if(e.getSource() == btn3) {
-			SignUp();
-			Seating(temp,seat);
-			if(success) new AddTime(temp);
+			new SignUp(seat);
 		}
 	}
+	
 
 }

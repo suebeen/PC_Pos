@@ -22,8 +22,12 @@ public class AddTime extends JFrame implements ActionListener{
 	
 	public void setTime() {
 		setTitle("시간선택");
+		Toolkit kit = this.getToolkit();
+		Dimension sc = kit.getScreenSize();
+		int scH = sc.height;
+		int scW = sc.width;
 		this.setSize(500, 150);
-		this.setLocation(500, 300); 
+		this.setLocation(scW/2-250,scH/2-75);
 
 		btn[0] = new JButton("1시간");
 		btn[1] = new JButton("2시간 ");
@@ -50,6 +54,7 @@ public class AddTime extends JFrame implements ActionListener{
 		else if(e.getSource() == btn[2]) time=3;
 		else if(e.getSource() == btn[3]) time=5;
 		else if(e.getSource() == btn[4]) time=10;
+		Start.success = false;
 		payment();
 	}
 }
