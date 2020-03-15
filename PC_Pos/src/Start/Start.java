@@ -27,7 +27,6 @@ public class Start extends JFrame implements ActionListener{
 	JButton[] seats = new JButton[50];
 	Person temp = new Person();
 	Seat[] seat;
-	static boolean success = false;
 	
 	public Start(Seat[] seat) {
 		this.seat = seat;
@@ -92,13 +91,11 @@ public class Start extends JFrame implements ActionListener{
 			String ID = JOptionPane.showInputDialog("ID를 입력하세요.");
 			isMember = Searching(ID);
 			if(isMember) {
-				new Seating(temp,seat);
-				if(success) {
-					success = false;
-					int result = JOptionPane.showConfirmDialog(null, "잔여시간: "+temp.getRestTime()+"분 , 충전하시겠습니까?", "충전여부", JOptionPane.YES_NO_OPTION); 
-					if(result == JOptionPane.YES_OPTION) {
-						new AddTime(temp);
-					}
+				if(temp.getUse()) {
+					JOptionPane.showMessageDialog(null, "이미 사용중입니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+				}else {
+					JOptionPane.showMessageDialog(null, "잔여시간:" +temp.getRestTime()+"분", "Message", JOptionPane.INFORMATION_MESSAGE); 
+					new Seating(temp,seat);
 				}
 			}
 			else {
@@ -115,8 +112,6 @@ public class Start extends JFrame implements ActionListener{
 			nonMember = new Person(sb.toString(),0);
 			NonMemberList.List.add(nonMember);
 			new Seating(nonMember,seat);
-			if(success) new AddTime(nonMember);
-			
 			//회원가입
 		}else if(e.getSource() == btn3) {
 			new SignUp(seat);

@@ -50,7 +50,6 @@ public class SignUp extends JFrame{
 					NEW.setRestTime(0);
 					MemberList.List.add(NEW);
 					if(NEW.getID()!=null) new Seating((Person)NEW,seat);
-					if(Start.success) new AddTime(NEW);
 				}
 			}
 		});

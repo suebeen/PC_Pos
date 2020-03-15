@@ -5,6 +5,7 @@ public class Person {
 	protected String ID;	//ID
 	protected Integer restTime;	//¿‹ø©Ω√∞£
 	protected double saleRatio;	//«“¿Œ∑¸
+	protected boolean use = false;
 	
 	//constructor
 	public Person() {};
@@ -41,6 +42,12 @@ public class Person {
 	}
 	public void setSaleRatio(double saleRatio) {
 		this.saleRatio = saleRatio;
+	}
+	public boolean getUse() {
+		return use;
+	}
+	public void setUse(boolean use) {
+		this.use = use;
 	}
 	
 	

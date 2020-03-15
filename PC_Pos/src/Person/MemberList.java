@@ -12,7 +12,7 @@ public class MemberList {
 	void DefaultMemberList(){
 		//DIAMOND
 		List.add(new Member("Á¤´ö¼ö","010-7354-5754","19960509","DiAMOND",10,500));
-		List.add(new Member("±è´ö¼ö","1111","19970509","DiAMOND",20,600));
+		List.add(new Member("±è´ö¼ö","1111","19970509","DiAMOND",0,600));
 		List.add(new Member("ÀÌ´ö¼ö","2222","19980509","DiAMOND",30,700));
 		List.add(new Member("¹Ú´ö¼ö","3333","19990509","DiAMOND",40,800));
 		List.add(new Member("ÃÖ´ö¼ö","4444","20000509","DiAMOND",5,1000));

@@ -5,9 +5,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import Manager.Sales;
 import Person.*;
+import Seat.Seat;
 
 //카드or현금 선택시 안넘어감
-public class Pay extends JFrame implements ActionListener{
+public class Pay extends JFrame{
 	
 	JLabel info,cost;
 	JPanel btnPanel = new JPanel();
@@ -30,11 +31,11 @@ public class Pay extends JFrame implements ActionListener{
 		btn1 = new JButton("카드");
 		btn1.setFont(new Font("SansSerif",Font.BOLD,18));
 		btn1.setPreferredSize(new Dimension(80,80));
-		btn1.addActionListener(this);
+		btn1.addActionListener(new timeActionListener(user));
 		btn2 = new JButton("현금");
 		btn2.setFont(new Font("SansSerif",Font.BOLD,18));
 		btn2.setPreferredSize(new Dimension(80,80));
-		btn2.addActionListener(this);
+		btn2.addActionListener(new timeActionListener(user));
 		
 		btnPanel.setBackground(Color.white);
 		btnPanel.add(info,null);
@@ -44,6 +45,35 @@ public class Pay extends JFrame implements ActionListener{
 		btnPanel.setLayout(new FlowLayout());
 		this.add(btnPanel,null);
 		this.setVisible(true);
+	}
+	
+	class timeActionListener implements ActionListener {
+		
+		Person user = new Person();
+		
+		timeActionListener(Person user) {
+			this.user = user;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == btn1) {
+				Sales.Card += money*(1-user.getSaleRatio());
+				Sales.Hour += money/1000;
+				user.setRestTime(user.getRestTime()+money/1000);
+				JOptionPane.showMessageDialog(null, "카드 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+				dispose();
+				if(user.getRestTime()!=0) startMessage();
+			}else if(e.getSource() == btn2) {
+				Sales.Cash += money*(1-user.getSaleRatio());
+				Sales.Hour += money/1000;
+				user.setRestTime(user.getRestTime()+money/1000);
+				JOptionPane.showMessageDialog(null, "현금 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+				dispose();
+				if(user.getRestTime()!=0) startMessage();
+			}
+		}
+		
 	}
 	//menu
 	public Pay(int m) {
@@ -61,11 +91,11 @@ public class Pay extends JFrame implements ActionListener{
 		btn1 = new JButton("카드");
 		btn1.setFont(new Font("SansSerif",Font.BOLD,18));
 		btn1.setPreferredSize(new Dimension(80,80));
-		btn1.addActionListener(this);
+		btn1.addActionListener(new menuActionListener());
 		btn2 = new JButton("현금");
 		btn2.setFont(new Font("SansSerif",Font.BOLD,18));
 		btn2.setPreferredSize(new Dimension(80,80));
-		btn2.addActionListener(this);
+		btn2.addActionListener(new menuActionListener());
 		btnPanel.setBackground(Color.white);
 		btnPanel.add(info,null);
 		btnPanel.add(cost,null);
@@ -75,20 +105,25 @@ public class Pay extends JFrame implements ActionListener{
 		this.add(btnPanel,null);
 		this.setVisible(true);
 		
-		
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource() == btn1) {
-			Sales.Card += money;
-			JOptionPane.showMessageDialog(null, "카드 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
-			dispose();
-		}else if(e.getSource() == btn2) {
-			Sales.Cash += money;
-			JOptionPane.showMessageDialog(null, "현금 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
-			dispose();
+	class menuActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//수량 추가해줘야함
+			if(e.getSource() == btn1) {
+				Sales.Card += money;
+				JOptionPane.showMessageDialog(null, "카드 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+				dispose();
+			}else if(e.getSource() == btn2) {
+				Sales.Cash += money;
+				JOptionPane.showMessageDialog(null, "현금 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+				dispose();
+			}
 		}
+	}
+	public void startMessage() {
+		JOptionPane.showMessageDialog(null, "이용을 시작합니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
 	}
 }

@@ -119,7 +119,7 @@ public class ShowHome extends JFrame implements ActionListener, Runnable{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == btn1) {
-			new Start();
+			new Start(seat);
 		}else if(e.getSource() == btn2) {
 			new ShowMenu();
 		}else if(e.getSource() == btn3) {

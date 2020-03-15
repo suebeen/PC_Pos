@@ -29,11 +29,11 @@ public class AddTime extends JFrame implements ActionListener{
 		this.setSize(500, 150);
 		this.setLocation(scW/2-250,scH/2-75);
 
-		btn[0] = new JButton("1시간");
-		btn[1] = new JButton("2시간 ");
-		btn[2] = new JButton("3시간 ");
-		btn[3] = new JButton("5시간 ");
-		btn[4] = new JButton("10시간 ");
+		btn[0] = new JButton("추가x");
+		btn[1] = new JButton("1분 ");
+		btn[2] = new JButton("3분 ");
+		btn[3] = new JButton("5분 ");
+		btn[4] = new JButton("10분 ");
 		
 		for(int i=0;i<btn.length;i++) {
 			btn[i].setFont(new Font("SansSerif",Font.BOLD,12));
@@ -49,12 +49,17 @@ public class AddTime extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		dispose();
-		if(e.getSource() == btn[0]) time=1;
-		else if(e.getSource() == btn[1]) time=2;
+		if(e.getSource() == btn[0]) time=0;
+		else if(e.getSource() == btn[1]) time=1;
 		else if(e.getSource() == btn[2]) time=3;
 		else if(e.getSource() == btn[3]) time=5;
 		else if(e.getSource() == btn[4]) time=10;
-		Start.success = false;
-		payment();
+		if(time!=0) payment();
+		else if(user.getRestTime()!=0){
+			JOptionPane.showMessageDialog(null, "이용을 시작합니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+		}else {
+			JOptionPane.showMessageDialog(null, "시간을 추가하세요.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+			new AddTime(user);
+		}
 	}
 }

@@ -53,12 +53,12 @@ public class Seating extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			dispose();
 			for(int j=0;j<seats.length;j++) {
 				if(e.getSource()==seats[j]&&!seat[j].getIsUse()) {
-					seat[j].setCus_Num((Member)user, j, true);
-					Start.success = true;
-					dispose();
+					seat[j].setCus_Num(user, j, true);
+					user.setUse(true);
+					new AddTime(user);
 				}
 			}
 		}

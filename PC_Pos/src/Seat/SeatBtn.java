@@ -1,3 +1,4 @@
+
 package Seat;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -10,14 +11,14 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import Person.Member;
+import Person.Person;
 
 public class SeatBtn extends JDialog implements ActionListener{
-	//홈화면에서 버튼 이미지 설정 클래스
-	Member cus;
+	//버튼 클릭시 출력되는 화면
+	Person cus;
 	boolean isUsing;//사용중인가 true -> 사용중 / false -> 사용ㄴㄴ
 	
-	public SeatBtn(Frame frame, Integer num,Member cus){
+	public SeatBtn(Frame frame, Integer num,Person cus){
 		super(frame,num.toString()+"번 좌석",true);
 		if(cus != null&&cus.getRestTime()!=0)
 			this.cus = cus;
@@ -37,7 +38,7 @@ public class SeatBtn extends JDialog implements ActionListener{
 		if(isUsing) {
 			this.setLayout(new GridLayout(0,1));
 			if(cus != null&&cus.getRestTime()!=0) 
-				this.add(new JLabel("<html>이름 : "+cus.getName()+"<br/>남은시간 : "+cus.getRestTime()+"<br/>미성년자 : "+cus.getBirth()+"</html>"));
+				this.add(new JLabel("<html>이름 : "+cus.getID()+"<br/>남은시간 : "+cus.getRestTime()+"<br/></html>"));
 			else
 				this.add(new JLabel("<html>===============사 용 가 능================<br/><br/></html>"));
 			JButton btn = new JButton("확인");
