@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import Manager.Sales;
 import Person.*;
 import Seat.Seat;
@@ -61,6 +63,9 @@ public class Pay extends JFrame{
 				Sales.Card += money*(1-user.getSaleRatio());
 				Sales.Hour += money/1000;
 				user.setRestTime(user.getRestTime()+money/1000);
+				if(user.getID().charAt(0)!='비') {
+					changeTotalTime((Member)user);
+				}
 				JOptionPane.showMessageDialog(null, "카드 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
 				dispose();
 				if(user.getRestTime()!=0) startMessage();
@@ -68,6 +73,9 @@ public class Pay extends JFrame{
 				Sales.Cash += money*(1-user.getSaleRatio());
 				Sales.Hour += money/1000;
 				user.setRestTime(user.getRestTime()+money/1000);
+				if(user.getID().charAt(0)!='비') {
+					changeTotalTime((Member)user);
+				}
 				JOptionPane.showMessageDialog(null, "현금 결제 되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
 				dispose();
 				if(user.getRestTime()!=0) startMessage();
@@ -125,5 +133,9 @@ public class Pay extends JFrame{
 	}
 	public void startMessage() {
 		JOptionPane.showMessageDialog(null, "이용을 시작합니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
+	}
+	
+	public void changeTotalTime(Member user) {
+		user.setTotalTime(user.getTotalTime()+money/1000);
 	}
 }

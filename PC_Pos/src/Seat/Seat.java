@@ -80,8 +80,13 @@ public class Seat extends JButton implements Runnable {
 				timeflag = spenttime;
 				cus.setRestTime(cus.getRestTime() - this.spenttime);
 			}
-			this.setText("<html>ID : " + cus.getID() + "<br/>남은시간 : " + cus.getRestTime()
-					+ "분</html>");
+			
+			if(cus.getID().charAt(0)=='비') this.setText("<html>ID : " + cus.getID() + "<br/>남은시간 : " + cus.getRestTime() + "분</html>");
+			else {
+				Member temp = (Member)cus;
+				this.setText("<html>ID : " + temp.getID() + "<br/>남은시간 : " + temp.getRestTime() + "분<br/>미성년 : " + temp.getBirth() + "</html>");
+			}
+			
 			if(cus.getRestTime()==0) {
 				this.isUse=false;
 				this.setLabel("사용가능");
