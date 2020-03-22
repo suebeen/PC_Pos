@@ -49,7 +49,7 @@ public class SignUp extends JFrame{
 					Member NEW = new Member(name.getText(),birth.getText(),id.getText());
 					NEW.setRestTime(0);
 					MemberList.List.add(NEW);
-					if(NEW.getID()!=null) new Seating((Person)NEW,seat);
+					if(NEW.getID()!=null) new Seating((Person)NEW,seat,false);
 				}
 			}
 		});

@@ -19,7 +19,7 @@ public class Seating extends JFrame{
 
 	JButton[] seats = new JButton[50];
 	
-	public Seating(Person user,Seat[] seat) {
+	public Seating(Person user,Seat[] seat,boolean flag) {
 		Toolkit kit = this.getToolkit();
 		Dimension sc = kit.getScreenSize();
 		int scH = sc.height;
@@ -35,7 +35,7 @@ public class Seating extends JFrame{
 			else seats[i].setBackground(Color.green);
 			seats[i].setFont(new Font("SansSerif",Font.BOLD,10));
 			seats[i].setPreferredSize(new Dimension(50,50));
-			seats[i].addActionListener(new myActionListener(seat,user));
+			seats[i].addActionListener(new myActionListener(seat,user,flag));
 			this.add(seats[i]);
 		}
 		this.setLayout(new FlowLayout());
@@ -43,25 +43,33 @@ public class Seating extends JFrame{
 		this.setVisible(true);
 	}
 	class myActionListener implements ActionListener {
-		Seat[] seat = new Seat[50];;
-		Person user = new Person();
+		Seat[] seat;//new를 지움
+		Person user;//new를 지움
+		boolean flag;
+
 		
-		myActionListener(Seat[] seat,Person user){
+		myActionListener(Seat[] seat,Person user,boolean flag){
 			this.seat = seat;
 			this.user = user;
+			this.flag = flag;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			dispose();
+
 			for(int j=0;j<seats.length;j++) {
 				if(e.getSource()==seats[j]&&!seat[j].getIsUse()) {
+
 					seat[j].setCus_Num(user, j, true);
 					user.setUse(true);
 					new AddTime(user);
+
+					break;
 				}
 			}
+			dispose();
 		}
+
 		
 	}
 	

@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import Person.Member;
 import Person.Person;
+import Start.AddTime;
 
 public class Seat extends JButton implements Runnable {
 	// 홈화면 버튼 클래스
@@ -22,6 +23,7 @@ public class Seat extends JButton implements Runnable {
 	int starttime;
 	int timeflag;
 	SeatActionListener temp;
+	int ThreadFlag;
 
 	public Seat(String str, int i, JFrame frame) {
 		super(str);
@@ -33,18 +35,23 @@ public class Seat extends JButton implements Runnable {
 
 	public void setCus_Num(Person cus1, int number1, boolean isUse1) {//손님 입력 시 부른다.
 		//손님, 좌석번호, 사용중
+		System.out.println(cus1.getID()+" "+number1+" "+isUse1);
 		cus = cus1;
 		number = number1;
 		isUse = isUse1;
-		temp.setcus(cus);		
+		cus1.setRestTime(-1);//엄청난 꼼수...
+		temp.setcus(cus);	
 		this.setBackground(Color.WHITE);
+
 		Calendar cal1 = Calendar.getInstance();
 		starttime = cal1.get(Calendar.MINUTE);
-		if(thread == null) {
+		if (thread == null) {
 			thread = new Thread(this);
 			thread.start();
 		}
+
 	}
+
 
 	class SeatActionListener implements ActionListener {
 		int number;
@@ -63,7 +70,6 @@ public class Seat extends JButton implements Runnable {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			new SeatBtn(frame, number,cus);
-
 		}
 	}
 
@@ -72,6 +78,9 @@ public class Seat extends JButton implements Runnable {
 		// TODO Auto-generated method stub
 
 		while(true) {
+			if(ThreadFlag==60)//60초가 지나면 잔여시간에 2분을 추가해준다. 왜 2분이냐면, 시작시 -1, 1분지나서 -1이라 2분임
+				cus.setRestTime(cus.getRestTime()+2);
+			
 			Calendar cal = Calendar.getInstance();
 			int now = cal.get(Calendar.MINUTE);
 			spenttime = now-starttime;
@@ -81,7 +90,7 @@ public class Seat extends JButton implements Runnable {
 				cus.setRestTime(cus.getRestTime() - this.spenttime);
 			}
 			
-			if(cus.getID().charAt(0)=='비') this.setText("<html>ID : " + cus.getID() + "<br/>남은시간 : " + cus.getRestTime() + "분</html>");
+			if(!(cus instanceof Member)) this.setText("<html>ID : " + cus.getID() + "<br/>남은시간 : " + cus.getRestTime() + "분</html>");
 			else {
 				Member temp = (Member)cus;
 				this.setText("<html>ID : " + temp.getID() + "<br/>남은시간 : " + temp.getRestTime() + "분<br/>미성년 : " + temp.getBirth() + "</html>");
@@ -98,6 +107,7 @@ public class Seat extends JButton implements Runnable {
 			}catch(InterruptedException e) {
 				e.printStackTrace();
 			}
+			ThreadFlag++;
 		}
 	}
 	

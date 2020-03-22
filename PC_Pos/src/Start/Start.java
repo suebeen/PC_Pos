@@ -94,8 +94,8 @@ public class Start extends JFrame implements ActionListener{
 				if(temp.getUse()) {
 					JOptionPane.showMessageDialog(null, "이미 사용중입니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
 				}else {
-					JOptionPane.showMessageDialog(null, "잔여시간:" +temp.getRestTime()+"분", "Message", JOptionPane.INFORMATION_MESSAGE); 
-					new Seating(temp,seat);
+					JOptionPane.showMessageDialog(null, "잔여시간:" +temp.getRestTime()+"분", "Message", JOptionPane.INFORMATION_MESSAGE);
+					new Seating(temp,seat,true);
 				}
 			}
 			else {
@@ -111,7 +111,7 @@ public class Start extends JFrame implements ActionListener{
 			sb.append(NonMemberList.List.size()+1);
 			nonMember = new Person(sb.toString(),0);
 			NonMemberList.List.add(nonMember);
-			new Seating(nonMember,seat);
+			new Seating(nonMember,seat,false);
 			//회원가입
 		}else if(e.getSource() == btn3) {
 			new SignUp(seat);

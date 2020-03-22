@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import Person.Person;
+import Seat.Seat;
 
 public class AddTime extends JFrame implements ActionListener{
 
@@ -10,10 +11,12 @@ public class AddTime extends JFrame implements ActionListener{
 	JButton[] btn = new JButton[5];
 	int time;
 	Person user;
+
 	
-	public AddTime(Person m) {
-		user = m;
+	public AddTime(Person user) {
+		this.user = user;
 		setTime();
+
 	}
 	
 	public void payment() {
@@ -46,6 +49,7 @@ public class AddTime extends JFrame implements ActionListener{
 		this.add(btnPanel,null);	
 		this.setVisible(true);
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		dispose();
@@ -54,10 +58,10 @@ public class AddTime extends JFrame implements ActionListener{
 		else if(e.getSource() == btn[2]) time=3;
 		else if(e.getSource() == btn[3]) time=5;
 		else if(e.getSource() == btn[4]) time=10;
-		if(time!=0) payment();
-		else if(user.getRestTime()!=0){
+		if(time!=0) {payment();
+		}else if(user.getRestTime()>0){
 			JOptionPane.showMessageDialog(null, "이용을 시작합니다.", "Message", JOptionPane.INFORMATION_MESSAGE); 
-		}else {
+		}else if(user.getRestTime()<=0){
 			JOptionPane.showMessageDialog(null, "시간을 추가하세요.", "Message", JOptionPane.INFORMATION_MESSAGE); 
 			new AddTime(user);
 		}
